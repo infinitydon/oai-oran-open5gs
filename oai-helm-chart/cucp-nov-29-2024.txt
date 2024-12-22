@@ -1,0 +1,165 @@
+Active_gNBs = ( "oai-cu-cp");
+# Asn1_verbosity, choice in: none, info, annoying
+Asn1_verbosity = "none";
+Num_Threads_PUSCH = 8;
+sa = 1;
+
+gNBs =
+(
+ {
+    ////////// Identification parameters:
+    gNB_ID = 0xe00;
+
+#     cell_type =  "CELL_MACRO_GNB";
+
+    gNB_name  = "oai-cu-cp";
+
+    // Tracking area code, 0x0000 and 0xfffe are reserved values
+    tracking_area_code  = 7;
+    plmn_list = ({ mcc = 208; mnc = 93; mnc_length = 2; snssaiList = ({ sst = 1; sd = 1 }) });
+
+    nr_cellid = 12345678L;
+
+    tr_s_preference = "f1";
+
+    local_s_if_name = "f1c";
+    local_s_address = "10.2.5.16";
+    remote_s_address = "127.0.0.1";
+    local_s_portc   = 501;
+    local_s_portd   = 2153;
+    remote_s_portc  = 500;
+    remote_s_portd  = 2153;
+
+    # ------- SCTP definitions
+    SCTP :
+    {
+        # Number of streams to use in input/output
+        SCTP_INSTREAMS  = 2;
+        SCTP_OUTSTREAMS = 2;
+    };
+
+
+    ////////// AMF parameters:
+    amf_ip_address      = ( { ipv4       = "10.2.2.16";});
+
+    E1_INTERFACE =
+    (
+      {
+        type = "cp";
+        ipv4_cucp = "10.2.1.16";
+        port_cucp = 38462;
+        ipv4_cuup = "0.0.0.0";
+        port_cuup = 38462;
+      }
+    )
+
+    NETWORK_INTERFACES :
+    {
+      GNB_IPV4_ADDRESS_FOR_NG_AMF              = "10.2.2.18";
+    };
+  }
+);
+
+security = {
+  # preferred ciphering algorithms
+  # the first one of the list that an UE supports in chosen
+  # valid values: nea0, nea1, nea2, nea3
+  ciphering_algorithms = ( "nea0" );
+
+  # preferred integrity algorithms
+  # the first one of the list that an UE supports in chosen
+  # valid values: nia0, nia1, nia2, nia3
+  integrity_algorithms = ( "nia2", "nia0" );
+
+  # setting 'drb_ciphering' to "no" disables ciphering for DRBs, no matter
+  # what 'ciphering_algorithms' configures; same thing for 'drb_integrity'
+  drb_ciphering = "yes";
+  drb_integrity = "no";
+};
+     log_config :
+     {
+       global_log_level                      ="info";
+       hw_log_level                          ="info";
+       phy_log_level                         ="info";
+       mac_log_level                         ="info";
+       rlc_log_level                         ="debug";
+       pdcp_log_level                        ="info";
+       rrc_log_level                         ="info";
+       f1ap_log_level                         ="info";
+       ngap_log_level                         ="debug";
+    };
+1710376.139831 [ENB_APP] I nfapi (0) running mode: MONOLITHIC
+1710376.139868 [GNB_APP] I Getting GNBSParams
+1710377.140504 [OPT] I OPT disabled
+1710377.140530 [HW] I Version: Branch: HEAD Abrev. Hash: 871078a64d Date: Tue Aug 13 03:57:41 2024 +0000
+1710377.140620 [PHY] I create_gNB_tasks() Task ready initialize structures
+1710377.140691 [NR_PHY] I RC.gNB = 0x55fba3bc3a50
+1710377.140699 [PHY] I No prs_config configuration found..!!
+1710377.140701 [PHY] I create_gNB_tasks() RC.nb_nr_L1_inst:0
+1710377.140702 [GNB_APP] I Allocating gNB_RRC_INST for 1 instances
+1710377.140805 [GNB_APP] I F1AP: gNB_CU_id[0] 3584
+1710377.140813 [GNB_APP] I F1AP: gNB_CU_name[0] oai-cu-cp
+1710377.140843 [GNB_APP] I SDAP layer is disabled
+1710377.140845 [GNB_APP] I Data Radio Bearer count 1
+1710377.140890 [NR_RRC] I do_SIB23_NR, size 9 
+ 1710377.148678 [GNB_APP] I default drx 0
+1710377.148697 [GNB_APP] I [gNB 0] gNB_app_register for instance 0
+1710377.148705 [UTIL] I threadCreate() for TASK_SCTP: creating thread with affinity ffffffff, priority 50
+1710377.152582 [ITTI] I Created Posix thread TASK_SCTP
+1710377.152593 [X2AP] I X2AP is disabled.
+1710377.152624 [UTIL] I threadCreate() for TASK_NGAP: creating thread with affinity ffffffff, priority 50
+1710377.156330 [ITTI] I Created Posix thread TASK_NGAP
+1710377.156329 [NGAP] D Starting NGAP layer
+1710377.156342 [UTIL] I threadCreate() for TASK_GNB_APP: creating thread with affinity ffffffff, priority 50
+1710377.160139 [ITTI] I Created Posix thread TASK_GNB_APP
+1710377.160152 [UTIL] I threadCreate() for TASK_RRC_GNB: creating thread with affinity ffffffff, priority 50
+1710377.160729 [NGAP] I Registered new gNB[0] and macro gNB id 3584
+1710377.160747 [NGAP] I [gNB 0] check the amf registration state
+1710377.165123 [UTIL] I threadCreate() for TASK_CU_F1: creating thread with affinity ffffffff, priority 50
+1710377.165474 [NGAP] I 3584 -> 0000e000
+1710377.169399 [F1AP] I Starting F1AP at CU
+1710377.169406 [ITTI] I Created Posix thread TASK_CU_F1
+1710377.169417 [UTIL] I threadCreate() for TASK_CUCP_E1: creating thread with affinity ffffffff, priority 50
+1710377.169424 [NR_RRC] I Entering main loop of NR_RRC message task
+1710377.169491 [F1AP] I F1AP_CU_SCTP_REQ(create socket) for 10.2.5.16 len 10
+1710377.169522 [F1AP] I In F1AP connection, don't start GTP-U, as we have also E1AP
+1710377.173102 [ITTI] I Created Posix thread TASK_CUCP_E1
+1710377.173099 [E1AP] I Starting E1AP at CU CP
+1710377.173232 [GTPU] I Configuring GTPu
+1710377.173261 [GTPU] I SA mode 
+1710377.173294 [ITTI] I Created Posix thread TASK_RRC_GNB
+1710377.173304 [E1AP] I E1AP_CUCP_SCTP_REQ(create socket) for 10.2.1.16 len 10
+1710377.178676 [NGAP] D servedGUAMIs.list.count 1
+1710377.178691 [NGAP] D PLMNSupportList.list.count 1
+1710377.178694 [NGAP] D PLMNSupportList.list.count 1
+1710377.178766 [GNB_APP] I [gNB 0] Received NGAP_REGISTER_GNB_CNF: associated AMF 1
+1710405.000334 [SCTP] W Received SCTP SHUTDOWN EVENT
+1710405.000487 [E1AP] I Received SCTP shutdown for assoc_id 41, removing CUCP endpoint
+1710405.000555 [NR_RRC] I Received E1 connection loss indication on RRC
+1710405.000564 [NR_RRC] W CU-UP for assoc_id 41 not found!
+1710406.496269 [NR_RRC] I Accepting new CU-UP ID 3584 name oai-cuup (assoc_id 43)
+1710536.702833 [SCTP] E Getsockopt SCTP_STATUS failed: Invalid argument
+1710536.702858 [SCTP] E sctp_get_sockinfo failed
+1710538.887859 [NR_RRC] I Received F1 Setup Request from gNB_DU 3584 (oai-du-rfsim) on assoc_id 47
+1710538.888061 [RRC] I Accepting DU 3584 (oai-du-rfsim), sending F1 Setup Response
+1710538.888079 [RRC] I DU uses RRC version 17.3.0
+1710591.154725 [NR_RRC] I Decoding CCCH: RNTI ce88, payload_size 6
+1710591.155389 [NR_RRC] I Created new UE context: CU UE ID 1 DU UE ID 52872 (rnti: ce88, random ue id cee60b62000000)
+1710591.155423 [RRC] I activate SRB 1 of UE 1
+1710591.155454 [NR_RRC] I rrc_gNB_generate_RRCSetup for RNTI ce88
+1710591.181465 [NR_RRC] A UE 1 Processing NR_RRCSetupComplete from UE
+1710591.181509 [NR_RRC] I [FRAME 00000][gNB][MOD 00][RNTI 1] UE State = NR_RRC_CONNECTED 
+1710591.181611 [NGAP] I UE 1: Chose AMF 'open5gs-amf' (assoc_id 38) through selected PLMN Identity index 0 MCC 208 MNC 93
+1710591.291786 [NGAP] D NGAP_FIND_PROTOCOLIE_BY_ID ie is NULL (searching for ie: 110)
+1710591.291802 [NGAP] W could not find NGAP_ProtocolIE_ID_id_UEAggregateMaximumBitRate
+1710591.291814 [NGAP] D NGAP_FIND_PROTOCOLIE_BY_ID ie is NULL (searching for ie: 71)
+1710591.291816 [NGAP] D AllowedNSSAI.list.count 1
+1710591.291819 [NGAP] D NGAP_FIND_PROTOCOLIE_BY_ID ie is NULL (searching for ie: 36)
+1710591.291881 [NR_RRC] I [gNB 0][UE 1] Selected security algorithms (0x7fbe3c00483c): ciphering 0, integrity 2 (algorithms changed)
+1710591.291901 [NR_RRC] I [gNB 0][UE ce88] Saved security key 61E2FE5ED40D29AF231BEF0A880B77742A5996BC48E1C7158E4EE2EAA490A6C2
+1710591.299752 [NR_RRC] I UE 1 Logical Channel DL-DCCH, Generate SecurityModeCommand (bytes 3)
+1710591.315126 [NR_RRC] I [FRAME 00000][gNB][MOD 00][RNTI 1] received securityModeComplete on UL-DCCH 1 from UE
+1710591.317803 [NR_RRC] I UE 1: Logical Channel DL-DCCH, Generate NR UECapabilityEnquiry (bytes 8, xid 1)
+1710591.338081 [NR_RRC] I UE 1: received UE capabilities (xid 1)
+1710591.338227 [NR_RRC] I Send message to ngap: NGAP_UE_CAPABILITIES_IND
+1710591.338441 [NR_RRC] I Send message to sctp: NGAP_InitialContextSetupResponse

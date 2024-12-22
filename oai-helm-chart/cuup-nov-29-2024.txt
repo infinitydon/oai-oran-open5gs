@@ -1,0 +1,77 @@
+Active_gNBs = ( "oai-cuup");
+# Asn1_verbosity, choice in: none, info, annoying
+Asn1_verbosity = "none";
+sa = 1;
+
+gNBs =
+(
+ {
+    ////////// Identification parameters:
+    gNB_ID = 0xe00;
+    gNB_CU_UP_ID = 0xe00;
+
+#     cell_type =  "CELL_MACRO_GNB";
+
+    gNB_name  =  "oai-cuup";
+
+    // Tracking area code, 0x0000 and 0xfffe are reserved values
+    tracking_area_code  = 7;
+    plmn_list = ({ mcc = 208; mnc = 93; mnc_length = 2; snssaiList = ({ sst = 1; sd = 1 }) });
+
+    tr_s_preference = "f1";
+
+    local_s_if_name = "f1u";
+    local_s_address = "10.2.5.17";
+    remote_s_address = "127.0.0.1";
+    local_s_portc   = 501;
+    local_s_portd   = 2153;
+    remote_s_portc  = 500;
+    remote_s_portd  = 2153;
+
+    # ------- SCTP definitions
+    SCTP :
+    {
+        # Number of streams to use in input/output
+        SCTP_INSTREAMS  = 2;
+        SCTP_OUTSTREAMS = 2;
+    };
+
+    E1_INTERFACE =
+    (
+      {
+        type = "up";
+        ipv4_cucp = "10.2.1.16";
+        ipv4_cuup = "10.2.1.17";
+      }
+    )
+
+    NETWORK_INTERFACES :
+    {
+      GNB_IPV4_ADDRESS_FOR_NG_AMF              = "10.2.3.17";
+      GNB_IPV4_ADDRESS_FOR_NGU                 = "10.2.3.17";
+      GNB_PORT_FOR_S1U                         = 2152; # Spec 2152
+    };
+  }
+);
+
+log_config : {
+  global_log_level = "info";
+  pdcp_log_level   = "info";
+  f1ap_log_level   = "info";
+  ngap_log_level   = "info";
+};
+[HW]   Version: Branch: HEAD Abrev. Hash: 871078a64d Date: Tue Aug 13 03:57:41 2024 +0000
+[0m[UTIL]   threadCreate() for TASK_SCTP: creating thread (no affinity, default priority)
+[0m[ITTI]   Created Posix thread TASK_SCTP
+[0m[UTIL]   threadCreate() for TASK_GTPV1_U: creating thread (no affinity, default priority)
+[0m[ITTI]   Created Posix thread TASK_GTPV1_U
+[0m[UTIL]   threadCreate() for TASK_CUUP_E1: creating thread (no affinity, default priority)
+[0m[ITTI]   Created Posix thread TASK_CUUP_E1
+[0m[E1AP]   Starting E1AP at CU UP
+[0m[GTPU]   Configuring GTPu
+[0m[GTPU]   SA mode 
+[0m[GTPU]   Initializing UDP for local address 10.2.5.17 with port 2153
+[0m[GTPU]   Created gtpu instance id: 96
+[0m[GTPU]   Configuring GTPu address : 10.2.3.17, port : 2152
+[0m[GTPU]   Initializing UDP for local address 10.2.3.17 with port 2152
+[0m[GTPU]   Created gtpu instance id: 97
